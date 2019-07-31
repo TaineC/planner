@@ -9,7 +9,8 @@ class planner extends Component {
 
     this.state = {
       noteInputs: '',
-      lists: [{notes:[]}]
+      lists: [],
+      notes: []
     };
   };
 
@@ -18,19 +19,21 @@ class planner extends Component {
   }
 
   addNote = (e) => {
-    e.preventDefault();
 
-    var note = {
-      id: Date.now(),
-      text: this.state.noteInputs
-    }
+      e.preventDefault();
 
-    var noteList = [...this.state.notes,note];
+        var note = {
+          id: Date.now(),
+          text: this.state.noteInputs
+        }
 
-    this.setState({
-      notes: noteList,
-      noteInputs:''
-    })
+        var noteList = [...this.state.notes,note];
+
+        this.setState({
+          notes: noteList,
+          noteInputs:''
+        }) 
+    
   }
 
   createNewList = (e) => {
@@ -70,7 +73,7 @@ class planner extends Component {
               <div className="notes new-note" id="create-note">
                 <label htmlFor="note">New Note</label>
                 <input type="text" className="write-note" id="write-note" value={this.state.noteInputs} onChange={this.noteInputValue}/>
-                <button type="submit" className="btn btn-primary" id="add-note" onClick={this.addNote}>Add Note</button>
+                <button type="submit" className="btn btn-primary" id="add-note" key={list.id} onClick={this.addNote}>Add Note</button>
               </div>
             </div>
             )
